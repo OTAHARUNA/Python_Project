@@ -32,13 +32,15 @@ close_btn = driver.find_element_by_xpath('//*[@class="modal-footer"]/button')
 close_btn.click()
 
 # スクール予約確認画面へ遷移
-reserve_btn = driver.find_element_by_xpath('//*[@id="side-bar"]/ul/li[3]/a')
-reserve_btn.click()
+for no in range(1,4):
+    xpath = '//*[@id="side-bar"]/ul/li[' + str(no) + ']/a'
+    reserve_btn = driver.find_element_by_xpath(xpath)
+    reserve_btn.click()
 
-driver.maximize_window()
-driver.save_screenshot('./images_evidence/予約画面.png')
+    driver.maximize_window()
+    driver.save_screenshot('./images_evidence/予約画面' + str(no) + '.png')
 
 #10秒待機
-time.sleep(10)
+time.sleep(5)
 # ブラウザを終了する。
 driver.close()
