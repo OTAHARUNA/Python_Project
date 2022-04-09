@@ -13,15 +13,6 @@ driver.maximize_window()
 driver.save_screenshot('ログイン画面.png')
 time.sleep(3)
 
-# 検証ツールを開く
-# pg.typewrite(["F12"])
-# time.sleep(3)
-
-# pg.hotkey('ctrl','shift','p')
-# driver.send_keys(Keys.CONTROL,"P")
-# send_keys(Keys.SHIFT,CONTROL,"P")
-# 3秒待機
-# time.sleep(3)
 # ログインIDを入力
 login_email = driver.find_element_by_name("email")
 login_email.send_keys(cf.email)
