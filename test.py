@@ -1,11 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
-CHROMEDRIVER = "path/chromedriver.exe"
+import config as cf
 
 # ドライバー指定でChromeブラウザを開く
-browser = webdriver.Chrome(CHROMEDRIVER)
+browser = webdriver.Chrome(cf.CHROMEDRIVER)
 
 # Googleアクセス
 browser.get('https://www.google.com/')
