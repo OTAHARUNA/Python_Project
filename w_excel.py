@@ -2,7 +2,7 @@ from openpyxl import Workbook
 
 # ワークブックの新規作成と保存
 wb = Workbook()
-mk_name = 'evidence1.xlsx'
+mk_name = 'evidence.xlsx'
 wb.save(mk_name)
 
 # ワークブックの読み込み
@@ -13,7 +13,6 @@ wb = load_workbook(mk_name)
 # ワークシートの選択
 ws = wb['Sheet']  # ワークシートを指定
 ws = wb.active  # アクティブなワークシートを選択
-print(f'sheet name: {ws.title}')  # sheet name: Sheet
 
 # ワークシートの作成
 wb.create_sheet('Login')
@@ -21,23 +20,21 @@ wb.create_sheet('Menu1')
 wb.create_sheet('Menu2')
 wb.create_sheet('Menu3')
 
+wss =[]
 # ワークシートの列挙
 for sheet in wb:
-    print('sheet name: {sheet.title}')
-    # print(f'sheet name: {sheet.title}')
+    wss.append(sheet)
 
-# セルに書き込み
-ws['A5'] = 'Hello from Python'
+# 1シート名のセルに書き込み
+wss[0]['A10'] = 'Hello from Python'
 wb.save(mk_name)  # overwrite evidence.xlsx
-
-# セルの値の表示
-print(ws['a1'].value)  # Hello from Python
+# 2シート目のセルに書き込み
+wss[1]['A5'] = 'Printing'
+wb.save(mk_name)  # overwrite evidence.xlsx
 
 # cellメソッドでセルに書き込み
 ws.cell(row=1, column=1).value = 1
-print(ws['a1'].value)  # 1
 ws.cell(row=1, column=1, value=2)
-print(ws['a1'].value)  # 2
 
 for idx in range(1, 4):
     ws.cell(row=1, column=idx, value=idx)
@@ -84,10 +81,7 @@ for column in ws.columns:
 
 # セル範囲の取得
 rng = ws['A1':'C2']
-print(rng)
-# 出力結果：
-#((<Cell 'Sheet'.A1>, <Cell 'Sheet'.B1>, <Cell 'Sheet'.C1>),
-# (<Cell 'Sheet'.A2>, <Cell 'Sheet'.B2>, <Cell 'Sheet'.C2>))
+ws.cell(row=6, column=1).value = "COPY[A1:C2]↓"
 
 values = []
 for row in rng:
@@ -120,8 +114,8 @@ values = [
     [1, 2, 3], [4, 5, 6]
 ]
 
-assign2range(ws['A1':'C2'], values)
-assign2range(ws['A1:C1'], [[100, 200, 300]])
-assign2range(ws['A3':'C4'], ws['A1':'C2'])
+assign2range(ws['A4':'C5'], values)
+assign2range(ws['A9:C9'], [[100, 200, 300]])
+assign2range(ws['A7':'C8'], ws['A1':'C2'])
 
 wb.save(mk_name)
