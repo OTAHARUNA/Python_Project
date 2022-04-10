@@ -118,4 +118,12 @@ assign2range(ws['A4':'C5'], values)
 assign2range(ws['A9:C9'], [[100, 200, 300]])
 assign2range(ws['A7':'C8'], ws['A1':'C2'])
 
+#合計
+wss[0]['A11'] = 'Sum↓'
+sum = 0
+for sum_row in range(4,6):
+    sum += ws.cell(row=sum_row, column=1).value
+wss[0]['A12'] = sum
+    # wb.save('./Excelサンプル.xlsx')
+
 wb.save(mk_name)
