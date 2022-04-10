@@ -18,6 +18,8 @@ xpath = '//*[@id="side-bar"]/ul/li[' + str(no) + ']/a'
 ```python
 for no in range(3): #0,1,2
 for no in range(1,4): #1,2,3
+    range(4,7) # 4 5 6
+    range(0, 10, 2) #0 2 4 6 8
 #特に終わりの宣言は不要でforの中身はインデント下げて、抜け出すときはインデント同じ
 ```
 
