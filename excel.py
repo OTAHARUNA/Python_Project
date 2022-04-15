@@ -34,20 +34,20 @@ def attach_img(target_full_file_names, set_column_idx, set_dir_name):
     for target_file in target_full_file_names:
         if imghdr.what(target_file) != None: # 画像ファイルかどうかの判定
             img = openpyxl.drawing.image.Image(target_file)
-            # img.anchor = 'A1'
-            # ws.add_image(img)
 
             # 画像のサイズを取得して、セルの大きさを合わせる（画像同士が重ならないようにするため）
-            # size_img = cv2.imread(target_file)
-            # height, width = size_img.shape[:2]
-            # if max_width < width:
-            #     max_width = width
-            # if not max_height[set_row_idx-1:set_row_idx]: # 配列「max_height」において、「set_row_idx」番目の要素が存在しなければ、挿入
-            #     max_height.insert(set_row_idx-1, height)
-            # if max_height[set_row_idx-1] < height:
-            #     max_height[set_row_idx-1] = height
-            # ws.row_dimensions[set_row_idx+1].height = max_height[set_row_idx-1] * 0.75
-            # ws.column_dimensions[str(column_letter)].width = max_width * 0.13
+            size_img = cv2.imread(target_file)
+            height, width = size_img.shape[:2]
+            if max_width < width:
+                max_width = width
+            if not max_height[set_row_idx-1:set_row_idx]: # 配列「max_height」において、「set_row_idx」番目の要素が存在しなければ、挿入
+                max_height.insert(set_row_idx-1, height)
+            if max_height[set_row_idx-1] < height:
+                max_height[set_row_idx-1] = height
+
+            column = str(column_letter)
+            ws.row_dimensions[set_row_idx+1].height = max_height[set_row_idx-1] * 0.75
+            ws.column_dimensions['A'].width = max_width * 0.13
             # ws.column_dimensions[column_letter].width = max_width * 0.13
 
             cell_address = ws.cell(row=set_row_idx + 1, column=set_column_idx).coordinate # セルの行列番号から、そのセルの番地を取得
