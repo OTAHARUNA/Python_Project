@@ -45,12 +45,7 @@ for row in ws.iter_rows():
     for cell in row:
         print(cell.value)
 # 出力結果：
-#1
-#2
-#3
-#-1
-#-2
-#-3
+#1 2 3 -1 -2 -3
 
 for row in ws.rows:
     for cell in row:
