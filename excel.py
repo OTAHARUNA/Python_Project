@@ -38,8 +38,12 @@ def attach_img(target_full_file_names, set_column_idx, set_dir_name):
             # 画像のサイズを取得して、セルの大きさを合わせる（画像同士が重ならないようにするため）
             size_img = cv2.imread(target_file)
             height, width = size_img.shape[:2]
-            if max_width < width:
-                max_width = width
+
+            img.width = 944 #25cmの事
+            img.height = img.width * height / width #比率はそのまま
+
+            if max_width < img.width:
+                max_width = img.width
             if not max_height[set_row_idx-1:set_row_idx]: # 配列「max_height」において、「set_row_idx」番目の要素が存在しなければ、挿入
                 max_height.insert(set_row_idx-1, height)
             if max_height[set_row_idx-1] < height:
