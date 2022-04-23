@@ -1,15 +1,13 @@
 # coding:utf-8
-from openpyxl import load_workbook
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import config as cf
 from bs4 import BeautifulSoup  # BeautifulSoup をインポート
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 import subprocess
 from openpyxl.styles import Alignment    # Alignmentクラスをインポート
 from openpyxl.styles import Border, Side, PatternFill, Font
-import xlwings as xw
 
 # ブラウザを開く。
 driver = webdriver.Chrome(executable_path=cf.CHROMEDRIVER)
@@ -50,10 +48,8 @@ ws.column_dimensions['B'].width = 38
 ws.column_dimensions['C'].width = 38
 ws.column_dimensions['D'].width = 38
 ws.column_dimensions['E'].width = 38
-# ws['A2:A29'].styles.PatternFill(fgColor='FF0000', bgColor='FF0000')
-# ws['A2:A29'].styles.PatternFill(patternType='solid',fgColor='FF0000', bgColor='FF0000')
-# ws['A1':'E29'].alignment = Alignment(wrapText=True)
 wb.save(mk_name)
+
 EXCEL = r'C:\Users\chopp\Project\Python_Project\test.xlsx'
 subprocess.Popen(['start', EXCEL], shell=True)
 time.sleep(10)
