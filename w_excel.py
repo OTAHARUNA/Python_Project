@@ -56,8 +56,7 @@ max_row = ws.max_row
 min_col = ws.min_column
 max_col = ws.max_column
 
-for row in ws.iter_rows(min_row=min_row, max_row=max_row,
-                        min_col=min_col, max_col=max_col):
+for row in ws.iter_rows(min_row=min_row, max_row=max_row,min_col=min_col, max_col=max_col):
     for cell in row:
         print(cell.value)
 
