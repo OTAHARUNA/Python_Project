@@ -1,6 +1,5 @@
 # coding:utf-8
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import time
 import config as cf
 from bs4 import BeautifulSoup  # BeautifulSoup をインポート
