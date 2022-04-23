@@ -3,11 +3,10 @@ from openpyxl import load_workbook
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-# import pyautogui as pg
 import config as cf
 from bs4 import BeautifulSoup  # BeautifulSoup をインポート
-import csv
-# from openpyxl import Workbook
+from openpyxl import Workbook
+import subprocess
 
 
 # ブラウザを開く。
@@ -21,20 +20,29 @@ rows = table.findAll("tr")  # テーブル中<tr>要素の内容を抽出
 print(rows)  # 抽出したHTMLドキュメントを検証
 time.sleep(1)
 
-# wb = Workbook()
-# mk_name = 'test.xlsx'
-# wb.save(mk_name)
-# # ワークブックの読み込み
-# wb = load_workbook(mk_name)
-
-with open("web-scraping.csv", "w", encoding='utf-8', newline="") as file:  # ファイル名は「web-scraping.csv」を指定する
-    writer = csv.writer(file)
-    for row in rows:
-        csvRow = []
-        for cell in row.findAll(['td', 'th']):  # tdとth要素をループでファイルに書き込む
-            csvRow.append(cell.get_text())
-        writer.writerow(csvRow)
-
-# ws = wb.active
-# ws['A1'] = 'Hello from Python'
-# wb.save(mk_name)
+wb = Workbook()
+mk_name = 'test.xlsx'
+wb.save(mk_name)
+# ワークブックの読み込み
+wb = load_workbook(mk_name)
+ws = wb.active
+row_count = 0
+for row in rows:
+    csvRow = []
+    row_count = row_count + 1
+    for cell in row.findAll(['td', 'th']):  # tdとth要素をループでファイルに書き込む
+        csvRow.append(cell.get_text())
+    if csvRow[0] == "\xa0" :
+        # del csvRow[0]
+        csvRow[0] == ""
+    # writer.writerow(csvRow)
+    for idx in range(1,len(csvRow)+1):
+        ws.cell(row=row_count, column=idx, value=csvRow[idx-1])
+ws.column_dimensions['A'].width = 34
+ws.column_dimensions['B'].width = 34
+ws.column_dimensions['C'].width = 34
+ws.column_dimensions['D'].width = 34
+wb.save(mk_name)
+EXCEL = r'C:\Users\chopp\Project\Python_Project\test.xlsx'
+subprocess.Popen(['start', EXCEL], shell=True)
+time.sleep(10)
