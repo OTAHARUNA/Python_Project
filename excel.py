@@ -5,7 +5,8 @@ import imghdr
 import openpyxl
 import cv2
 import numpy as np
-
+import subprocess
+import time
 
 # 定数設定
 INPUT_IMG_DIR = './images_evidence/' # 貼り付ける画像を置いておくルートディレクトリ
@@ -84,3 +85,7 @@ for dir_name in dirs:
 
 # ファイルへの書き込み
 wb.save(RESULT_FILE_NAME)
+
+EXCEL = r'C:\Users\chopp\Project\Python_Project\result.xlsx'
+subprocess.Popen(['start', EXCEL], shell=True)
+time.sleep(10)
