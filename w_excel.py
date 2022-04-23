@@ -4,7 +4,7 @@ import time
 
 # ワークブックの新規作成と保存
 wb = Workbook()
-mk_name = 'evidence.xlsx'
+mk_name = 'test.xlsx'
 wb.save(mk_name)
 
 # ワークブックの読み込み
@@ -29,10 +29,10 @@ for sheet in wb:
 
 # 1シート名のセルに書き込み
 wss[0]['A10'] = 'Hello from Python'
-wb.save(mk_name)  # overwrite evidence.xlsx
+wb.save(mk_name)  # overwrite test.xlsx
 # 2シート目のセルに書き込み
 wss[1]['A5'] = 'Printing'
-wb.save(mk_name)  # overwrite evidence.xlsx
+wb.save(mk_name)  # overwrite test.xlsx
 
 # cellメソッドでセルに書き込み
 ws.cell(row=1, column=1).value = 1
@@ -124,6 +124,6 @@ wss[0]['A12'] = sum
 
 wb.save(mk_name)
 
-EXCEL = r'C:\Users\chopp\Project\Python_Project\evidence.xlsx'
+EXCEL = r'C:\Users\chopp\Project\Python_Project\test.xlsx'
 subprocess.Popen(['start', EXCEL], shell=True)
 time.sleep(10)

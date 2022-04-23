@@ -14,6 +14,11 @@ driver = webdriver.Chrome(executable_path=cf.CHROMEDRIVER)
 driver.get("https://www.ricoh.co.jp/mfp/color/im-C6000-C5500-C4500-C3500-C3000-C2500/spec.html")
 content = driver.page_source
 BS = BeautifulSoup(content, "html.parser")
+
+# 画面上でも操作しているかのようにタブ開く
+tab_btn = driver.find_element_by_xpath('//*[@class="acd_ttl acd_ttl02 accordionTitle"]/a')
+tab_btn.click()
+
 # テーブル"wp-block-table is-style-stripes"を指定
 table = BS.findAll("table", {"class": "nml nml_scroll"})[0]
 rows = table.findAll("tr")  # テーブル中<tr>要素の内容を抽出
@@ -21,7 +26,7 @@ print(rows)  # 抽出したHTMLドキュメントを検証
 time.sleep(1)
 
 wb = Workbook()
-mk_name = 'test.xlsx'
+mk_name = 'copy_machine.xlsx'
 wb.save(mk_name)
 # ワークブックの読み込み
 wb = load_workbook(mk_name)
@@ -50,6 +55,6 @@ ws.column_dimensions['D'].width = 38
 ws.column_dimensions['E'].width = 38
 wb.save(mk_name)
 
-EXCEL = r'C:\Users\chopp\Project\Python_Project\test.xlsx'
+EXCEL = r'C:\Users\chopp\Project\Python_Project\copy_machine.xlsx'
 subprocess.Popen(['start', EXCEL], shell=True)
 time.sleep(10)
