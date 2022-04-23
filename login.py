@@ -10,7 +10,7 @@ driver = webdriver.Chrome(executable_path=cf.CHROMEDRIVER)
 # Googleの検索TOP画面を開く。
 driver.get(cf.URL)
 driver.maximize_window()
-driver.save_screenshot('./images_evidence/ログイン画面.png')
+driver.save_screenshot('./images_evidence/login.png')
 time.sleep(1)
 
 # ログインIDを入力
@@ -38,7 +38,7 @@ for no in range(1,4):
     reserve_btn.click()
 
     driver.maximize_window()
-    driver.save_screenshot('./images_evidence/予約画面' + str(no) + '.png')
+    driver.save_screenshot('./images_evidence/yoyaku' + str(no) + '.png')
 
 #10秒待機
 time.sleep(5)

@@ -1,4 +1,6 @@
 from openpyxl import Workbook
+import subprocess
+import time
 
 # ワークブックの新規作成と保存
 wb = Workbook()
@@ -45,12 +47,7 @@ for row in ws.iter_rows():
     for cell in row:
         print(cell.value)
 # 出力結果：
-#1
-#2
-#3
-#-1
-#-2
-#-3
+#1 2 3 -1 -2 -3
 
 for row in ws.rows:
     for cell in row:
@@ -61,8 +58,7 @@ max_row = ws.max_row
 min_col = ws.min_column
 max_col = ws.max_column
 
-for row in ws.iter_rows(min_row=min_row, max_row=max_row,
-                        min_col=min_col, max_col=max_col):
+for row in ws.iter_rows(min_row=min_row, max_row=max_row,min_col=min_col, max_col=max_col):
     for cell in row:
         print(cell.value)
 
@@ -127,3 +123,7 @@ wss[0]['A12'] = sum
     # wb.save('./Excelサンプル.xlsx')
 
 wb.save(mk_name)
+
+EXCEL = r'C:\Users\chopp\Project\Python_Project\evidence.xlsx'
+subprocess.Popen(['start', EXCEL], shell=True)
+time.sleep(10)
